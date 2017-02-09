@@ -7,12 +7,12 @@ namespace sim {
 	template <typename T>
 	class SimChannel {
 		public:
-			SimChannel(int subDevice, int channel);
-			virtual T getValue() { return value; };
-			virtual void setValue(T val) { value = val; };
+			SimChannel(int subDevice, int channel) {this->subDevice = subDevice; this->channel = channel;};
+			T getValue() { return value; };
+			void setValue(T val) { value = val; };
 			
-			virtual int getSubDevice() { return subDevice; };
-			virtual int getChannel() { return channel; };
+			int getSubDevice() { return subDevice; };
+			int getChannel() { return channel; };
 			
 		private:
 			int subDevice;

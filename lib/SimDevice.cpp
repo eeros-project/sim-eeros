@@ -1,6 +1,6 @@
 #include <SimDevice.hpp>
-#include <SimChannel.hpp>
 #include <eeros/core/EEROSException.hpp>
+#include <unistd.h>
 
 using namespace sim;
 
@@ -56,8 +56,11 @@ SimChannel<bool>* SimDevice::getChannel(int subdeviceNumber, int channel) {
 }
 
 void SimDevice::run() {
-	for(int i = 0; i < digOutputs.size(); i++){
-		digInputs[i]->setValue(digOutputs[i]->getValue());
+	while(true){
+		for(int i = 0; i < digOutputs.size(); i++){
+			digInputs[i]->setValue(digOutputs[i]->getValue());
+		}
+		usleep(1000);
 	}
 }
 
