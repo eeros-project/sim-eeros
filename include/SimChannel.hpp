@@ -1,23 +1,32 @@
 #ifndef SIM_EEROS_CHANNEL_HPP_
 #define SIM_EEROS_CHANNEL_HPP_
 
-#include <map>
+#include <atomic>
 
 namespace sim {
-	template <typename T>
-	class SimChannel {
+  
+	class SimChannelInterface {
 		public:
-			SimChannel(int subDevice, int channel) {this->subDevice = subDevice; this->channel = channel;};
-			T getValue() { return value; };
-			void setValue(T val) { value = val; };
+			virtual ~SimChannelInterface() {}
+			virtual int getSubDevice() = 0;
+			virtual int getChannel() = 0;
+	};
+	
+	template <typename T>
+	class SimChannel : public SimChannelInterface {
+		public:
+			SimChannel(int subDevice, int channel) {this->subDevice = subDevice; this->channel = channel;}
+			~SimChannel() {}
+			T getValue() { return value.load(); }
+			void setValue(T val) { value.store(val); }
 			
-			int getSubDevice() { return subDevice; };
-			int getChannel() { return channel; };
+			int getSubDevice() { return subDevice; }
+			int getChannel() { return channel; }
 			
 		private:
 			int subDevice;
 			int channel;
-			T value;
+			std::atomic<T> value;
 	};
 };
 

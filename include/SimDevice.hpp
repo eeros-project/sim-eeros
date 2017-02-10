@@ -22,8 +22,13 @@ namespace sim {
 		static std::map<std::string, sim::SimDevice *> devices;
 		std::string simId;
 		
-		std::vector<sim::SimChannel<bool> *> digOutputs;
-		std::vector<sim::SimChannel<bool> *> digInputs;
+		// simulate digital Output: will reflect value to reflectOutDigInputs
+		std::vector<sim::SimChannel<bool> *> reflectSimDigOut_DigOutputs;
+		std::vector<sim::SimChannel<bool> *> reflectSimDigOut_DigInputs;
+		
+		// simulate digital Input: will reflect value from reflectSimDigIn_DigInputs
+		std::vector<sim::SimChannel<bool> *> reflectSimDigIn_DigInputs;
+		std::vector<sim::SimChannel<bool> *> reflectSimDigIn_DigOutputs;
 		
 		std::thread* t;
 	};
