@@ -6,29 +6,38 @@
 #include <vector>
 #include <thread>
 #include <SimChannel.hpp>
+#include <Reflect.hpp>
 
 namespace sim {
+	enum SubDeviceNumber{
+			REFLECT_OUT_DIGOUT = 0,
+			REFLECT_OUT_DIGIN = 1,
+			
+			REFLECT_IN_DIGIN = 2,
+			REFLECT_IN_DIGOUT = 3,
+			
+			REFLECT_OUT_AOUT = 4,
+			REFLECT_OUT_AIN = 5,
+			
+			REFLECT_IN_AIN = 6,
+			REFLECT_IN_AOUT = 7
+	};
 
 	class SimDevice {
 	public:
-		SimDevice(std::string simId);
 		virtual ~SimDevice();
-		virtual SimChannel<bool>* getChannel(int subdeviceNumber, int channel);
+		virtual SimChannel<bool>* getLogicChannel(int subdeviceNumber, int channel);
 		static SimDevice* getDevice(std::string simId);
 
         private:
+		SimDevice(std::string simId);
 		virtual void run();
 		
 		static std::map<std::string, sim::SimDevice *> devices;
 		std::string simId;
 		
-		// simulate digital Output: will reflect value to reflectOutDigInputs
-		std::vector<sim::SimChannel<bool> *> reflectSimDigOut_DigOutputs;
-		std::vector<sim::SimChannel<bool> *> reflectSimDigOut_DigInputs;
-		
-		// simulate digital Input: will reflect value from reflectSimDigIn_DigInputs
-		std::vector<sim::SimChannel<bool> *> reflectSimDigIn_DigInputs;
-		std::vector<sim::SimChannel<bool> *> reflectSimDigIn_DigOutputs;
+		sim::Reflect<bool> reflectDigOut;
+		sim::Reflect<bool> reflectDigIn;
 		
 		std::thread* t;
 	};

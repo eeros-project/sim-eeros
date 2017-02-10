@@ -5,7 +5,7 @@ using namespace sim;
 DigOut::DigOut(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted) : 
 					Output<bool>(id, libHandle), inverted(inverted) {
 	SimDevice *dev = SimDevice::getDevice(device);
-	chan = dev->getChannel(subDeviceNumber, channel);
+	chan = dev->getLogicChannel(subDeviceNumber, channel);
 }
 
 bool DigOut::get() {

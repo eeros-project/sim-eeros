@@ -10,22 +10,13 @@ std::map<std::string, SimDevice *> SimDevice::devices;
 
 // device will select function 
 
-SimDevice::SimDevice(std::string simId) {
+SimDevice::SimDevice(std::string simId) : 
+		      reflectDigOut(NOF_SIM_CHANNELS, {REFLECT_OUT_DIGOUT, REFLECT_OUT_DIGIN}), 
+		      reflectDigIn(NOF_SIM_CHANNELS, {REFLECT_IN_DIGIN, REFLECT_IN_DIGOUT}) {
 	this->simId = simId;
 	auto devIt = devices.find(simId);
 	if(devIt != devices.end()){
 		throw new eeros::EEROSException("device already open, claim already opened device via getDevice()");
-	}
-	
-	// creating all Simulation Devices and Channels
-	
-	// reflect digital Outputs
-	for(int i = 0; i < NOF_SIM_CHANNELS; i++){
-		reflectSimDigOut_DigOutputs.push_back(new SimChannel<bool>(0, i));
-		reflectSimDigOut_DigInputs.push_back(new SimChannel<bool>(1, i));
-		
-		reflectSimDigIn_DigInputs.push_back(new SimChannel<bool>(2, i));
-		reflectSimDigIn_DigOutputs.push_back(new SimChannel<bool>(3, i));
 	}
 	
 	t = new std::thread([this](){ this->run(); });
@@ -50,20 +41,28 @@ SimDevice* SimDevice::getDevice(std::string simId) {
 	}
 }
 
-SimChannel<bool>* SimDevice::getChannel(int subdeviceNumber, int channel) {
+SimChannel<bool>* SimDevice::getLogicChannel(int subDeviceNumber, int channel) {
 	if(simId == "reflect"){
-		if(reflectSimDigOut_DigOutputs[0]->getSubDevice() == subdeviceNumber){
-			for(int i = 0; i < reflectSimDigOut_DigOutputs.size(); i++){
-				if(reflectSimDigOut_DigOutputs[i]->getChannel() == channel){
-					return reflectSimDigOut_DigOutputs[i];
-				}
+		// digital output simulation block
+		
+		switch(subDeviceNumber){
+			// simulate digital Out
+			case REFLECT_OUT_DIGOUT:{
+				return dynamic_cast<SimChannel<bool>*>(reflectDigOut.getInChannel(channel));
+				break;		// not reached
 			}
-		}
-		else if(reflectSimDigOut_DigInputs[0]->getSubDevice() == subdeviceNumber){
-			for(int i = 0; i < reflectSimDigOut_DigInputs.size(); i++){
-				if(reflectSimDigOut_DigInputs[i]->getChannel() == channel){
-					return reflectSimDigOut_DigInputs[i];
-				}
+			case REFLECT_OUT_DIGIN:{
+				return dynamic_cast<SimChannel<bool>*>(reflectDigOut.getOutChannel(channel));
+				break;		// not reached
+			}
+			// simulate digital In
+			case REFLECT_IN_DIGIN:{
+				return dynamic_cast<SimChannel<bool>*>(reflectDigIn.getOutChannel(channel));
+				break;
+			}
+			case REFLECT_IN_DIGOUT:{
+				return dynamic_cast<SimChannel<bool>*>(reflectDigIn.getInChannel(channel));
+				break;
 			}
 		}
 	}
@@ -74,14 +73,9 @@ SimChannel<bool>* SimDevice::getChannel(int subdeviceNumber, int channel) {
 
 void SimDevice::run() {
 	while(true){
-		// simulate digital Output: reflect values to reflectSimDigOut_DigInputs
-		for(int i = 0; i < reflectSimDigOut_DigOutputs.size(); i++){
-			reflectSimDigOut_DigInputs[i]->setValue(reflectSimDigOut_DigOutputs[i]->getValue());
-		}
-		// simulate digital Input: reflect values from reflectSimDigIn_DigOutputs
-		for(int i = 0; i < reflectSimDigIn_DigInputs.size(); i++){
-			reflectSimDigIn_DigInputs[i]->setValue(reflectSimDigIn_DigOutputs[i]->getValue());
-		}
+		reflectDigOut.run();
+		reflectDigIn.run();
+		
 		usleep(1000);
 	}
 }
