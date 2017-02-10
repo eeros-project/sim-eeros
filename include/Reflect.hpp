@@ -7,10 +7,23 @@
 #include <SimChannel.hpp>
 #include <eeros/core/EEROSException.hpp>
 
+/**
+ * usage: 
+ * simulate digital Output:
+ * - connect digital output from eeros-application to subdevice 0 (REFLECT_OUT_DIGOUT) and desired channel x
+ * - connect digital test input to subdevice 1 (REFLECT_OUT_DIGIN) and channel x
+ * - you can read state of digital output at your test input channel
+ * 
+ * simulate digital Input:
+ * - connect intput to subdevice 2 (REFLECT_IN_DIGIN) and channel y
+ * - connect test output to subdevice 3 (REFLECT_IN_DIGOUT) and channel y
+ * - read state of your input on test output channel
+ */
+
 namespace sim{
 
 	template <typename T>
-	class Reflect : sim::SimBehaviour<T> {
+	class Reflect : SimBehaviour<T> {
 		public:
 			Reflect(int nofSimChannels, std::initializer_list<int> subDeviceNumber) : subDevNumbers(subDeviceNumber){
 				if(subDeviceNumber.size() != 2){
@@ -25,6 +38,7 @@ namespace sim{
 			~Reflect() {
 				in.clear();
 				out.clear();
+				subDevNumbers.clear();
 			}
 			virtual void run(){
 				// reflect

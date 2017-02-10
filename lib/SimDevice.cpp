@@ -6,7 +6,7 @@ using namespace sim;
 
 std::map<std::string, SimDevice *> SimDevice::devices;
 
-#define NOF_SIM_CHANNELS 5
+#define NOF_SIM_CHANNELS 10
 
 // device will select function 
 
