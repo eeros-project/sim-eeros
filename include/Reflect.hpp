@@ -2,13 +2,15 @@
 #define SIM_EEROS_REFLECT_HPP_
 
 #include <vector>
+
+#include <SimBehaviour.hpp>
 #include <SimChannel.hpp>
 #include <eeros/core/EEROSException.hpp>
 
 namespace sim{
 
 	template <typename T>
-	class Reflect {
+	class Reflect : sim::SimBehaviour<T> {
 		public:
 			Reflect(int nofSimChannels, std::initializer_list<int> subDeviceNumber) : subDevNumbers(subDeviceNumber){
 				if(subDeviceNumber.size() != 2){

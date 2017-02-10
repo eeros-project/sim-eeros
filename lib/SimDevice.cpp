@@ -16,7 +16,7 @@ SimDevice::SimDevice(std::string simId) :
 	this->simId = simId;
 	auto devIt = devices.find(simId);
 	if(devIt != devices.end()){
-		throw new eeros::EEROSException("device already open, claim already opened device via getDevice()");
+		throw new eeros::EEROSException("device already open, claim already opened device via getDevice()"); // should not occur!
 	}
 	
 	t = new std::thread([this](){ this->run(); });
@@ -37,7 +37,10 @@ SimDevice* SimDevice::getDevice(std::string simId) {
 		return devIt->second;
 	}
 	else{
-		return new SimDevice(simId);
+		if(simId == "reflect"){
+			return new SimDevice(simId);
+		}
+		throw eeros::EEROSException(simId + " not supported.");
 	}
 }
 

@@ -33,12 +33,12 @@ namespace sim {
 		SimDevice(std::string simId);
 		virtual void run();
 		
-		static std::map<std::string, sim::SimDevice *> devices;
 		std::string simId;
 		
 		sim::Reflect<bool> reflectDigOut;
 		sim::Reflect<bool> reflectDigIn;
 		
+		static std::map<std::string, sim::SimDevice *> devices;
 		std::thread* t;
 	};
 };
