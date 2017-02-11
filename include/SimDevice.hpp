@@ -23,6 +23,10 @@ namespace sim {
 			REFLECT_IN_AIN = 6,
 			REFLECT_IN_AOUT = 7
 	};
+	
+	const std::vector<std::string> simFeatures = {
+		"reflect"
+	};
 
 	class SimDevice {
 	public:

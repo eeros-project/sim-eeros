@@ -1,5 +1,7 @@
 # sim-eeros
-Hardware Simulator for EEROS
+Hardware Simulator for EEROS 
+
+visit http://eeros.org/ and https://github.com/eeros-project
 
 ## Available devices
 * reflect: reflects input from subdevice channel x to output subdevice channel x
@@ -38,7 +40,7 @@ example to test digital output "out0" which can be read on test input "inTest0"
 }
 ```
 for a complete example visit https://github.com/akalberer/eeros-framework/tree/hal/examples/sim 
-or soon https://github.com/eeros-project/eeros-framework
+or soon on https://github.com/eeros-project/eeros-framework
 
 ## Available subdevices
 | Function            | Description                     | Subdevice     | available Channels  |
@@ -61,7 +63,7 @@ or soon https://github.com/eeros-project/eeros-framework
    * getOutChannel(): return shared_ptr to output channel of your device
 1. add channels to SimDevice.hpp (see sim::Reflect<bool> reflectDigOut)
 1. call run() of your newly added channels in SimDevice::run(): only with this your device run() is executed
-1. add identifier string to available functions
+1. add identifier string to available simFeatures in SimDevice.hpp
 1. add entries to SubDeviceNumber-Enum in SimDevice.hpp with your desired subdevice number for your sim-device
-1. add getInChannel() and getOutChannel() of your device type to getLogicChannel() or getRealChannel() in SimDevice.cpp
+1. add getInChannel() and getOutChannel() of your device type to getLogicChannel() or getRealChannel() in SimDevice.cpp accordingly
 

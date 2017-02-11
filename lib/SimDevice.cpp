@@ -40,10 +40,12 @@ SimDevice* SimDevice::getDevice(std::string simId) {
 		return devIt->second;
 	}
 	else{
-		if(simId == "reflect"){
-			return new SimDevice(simId);
+		for(int i = 0; i < simFeatures.size(); i++){
+			if(simFeatures[i] == simId){
+				return new SimDevice(simId);
+			}
 		}
-		throw eeros::EEROSException(simId + " not supported.");
+		throw eeros::EEROSException("simulation feature '" + simId + "' is not supported.");
 	}
 }
 
@@ -84,12 +86,10 @@ std::shared_ptr<SimChannel<double>> SimDevice::getRealChannel(int subDeviceNumbe
 		switch(subDeviceNumber){
 			// simulate analog Out
 			case REFLECT_OUT_AOUT:{
-				std::cout << "out_aout " << std::endl;
 				return reflectAnalogOut.getInChannel(channel);
 				break;		// not reached
 			}
 			case REFLECT_OUT_AIN:{
-				std::cout << "out_ain " << std::endl;
 				return reflectAnalogOut.getOutChannel(channel);
 				break;		// not reached
 			}
