@@ -2,6 +2,7 @@
 #define SIM_EEROS_CHANNEL_HPP_
 
 #include <atomic>
+#include <iostream>
 
 namespace sim {
   

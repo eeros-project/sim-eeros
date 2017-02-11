@@ -28,6 +28,7 @@ namespace sim {
 	public:
 		virtual ~SimDevice();
 		virtual std::shared_ptr<SimChannel<bool>> getLogicChannel(int subDeviceNumber, int channel);
+		virtual std::shared_ptr<SimChannel<uint64_t>> getRealChannel(int subDeviceNumber, int channel);
 		static SimDevice* getDevice(std::string simId);
 
         private:
@@ -36,8 +37,13 @@ namespace sim {
 		
 		std::string simId;
 		
+		// logic channels
 		sim::Reflect<bool> reflectDigOut;
 		sim::Reflect<bool> reflectDigIn;
+		
+		// real channels: max 32 bit resolution
+		sim::Reflect<uint64_t> reflectAnalogOut;
+		sim::Reflect<uint64_t> reflectAnalogIn;
 		
 		static std::map<std::string, sim::SimDevice *> devices;
 		std::thread* t;

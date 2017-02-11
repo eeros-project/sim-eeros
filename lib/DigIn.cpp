@@ -5,7 +5,7 @@ using namespace sim;
 DigIn::DigIn(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted) : 
 				Input<bool>(id, libHandle), inverted(inverted) {
 	SimDevice *dev = SimDevice::getDevice(device);
-	chan = dev->getLogicChannel(subDeviceNumber, channel);
+	this->chan = dev->getLogicChannel(subDeviceNumber, channel);
 }
 
 bool DigIn::get() {

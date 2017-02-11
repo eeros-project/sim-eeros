@@ -1,6 +1,6 @@
 include_directories(../include/)
 
-set(SIMEEROS_SRCS SimDevice.cpp DigIn.cpp DigOut.cpp)
+set(SIMEEROS_SRCS SimDevice.cpp DigIn.cpp DigOut.cpp AnalogIn.cpp AnalogOut.cpp)
 
 add_library(simeeros SHARED ${SIMEEROS_SRCS})
 add_library(simeeros_static ${SIMEEROS_SRCS})
