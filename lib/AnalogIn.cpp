@@ -19,7 +19,7 @@ AnalogIn::AnalogIn(std::string id,
 }
 
 double AnalogIn::get() {
-	double inVal = (static_cast<double>(chan->getValue()) - offset) / scale;
+	double inVal = (chan->getValue() - offset) / scale;
 	if(inVal > maxIn) inVal = maxIn;
 	if(inVal < minIn) inVal = minIn;
 	

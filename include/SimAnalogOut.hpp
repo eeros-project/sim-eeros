@@ -18,7 +18,7 @@ namespace sim {
 		virtual void set(double voltage);
 		
 	private:
-		std::shared_ptr<sim::SimChannel<uint64_t>> chan;
+		std::shared_ptr<sim::SimChannel<double>> chan;
 	};
 };
 

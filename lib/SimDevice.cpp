@@ -77,7 +77,7 @@ std::shared_ptr<SimChannel<bool>> SimDevice::getLogicChannel(int subDeviceNumber
 	}
 }
 
-std::shared_ptr<SimChannel<uint64_t>> SimDevice::getRealChannel(int subDeviceNumber, int channel) {
+std::shared_ptr<SimChannel<double>> SimDevice::getRealChannel(int subDeviceNumber, int channel) {
 	if(simId == "reflect"){
 		// digital output simulation block
 		

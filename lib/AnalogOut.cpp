@@ -19,16 +19,16 @@ AnalogOut::AnalogOut(std::string id,
 }
 
 double AnalogOut::get() {
-	return (static_cast<int64_t>(chan->getValue()) - offset) / scale;
+	return (chan->getValue() - offset) / scale;
 }
 
 void AnalogOut::set(double voltage) {
-	int64_t value = static_cast<int64_t>((voltage - offset)/scale);
+	double value = (voltage - offset)/scale;
 	
 	if(value > maxOut) value = maxOut;
 	if(value < minOut) value = minOut;
 	
-	chan->setValue(static_cast<uint64_t>(value));
+	chan->setValue(value);
 }
 
 extern "C"{
