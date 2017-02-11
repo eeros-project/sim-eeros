@@ -4,6 +4,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <memory>
 #include <thread>
 #include <SimChannel.hpp>
 #include <Reflect.hpp>
@@ -26,7 +27,7 @@ namespace sim {
 	class SimDevice {
 	public:
 		virtual ~SimDevice();
-		virtual SimChannel<bool>* getLogicChannel(int subdeviceNumber, int channel);
+		virtual std::shared_ptr<SimChannel<bool>> getLogicChannel(int subDeviceNumber, int channel);
 		static SimDevice* getDevice(std::string simId);
 
         private:

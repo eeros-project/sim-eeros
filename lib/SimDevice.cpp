@@ -44,27 +44,27 @@ SimDevice* SimDevice::getDevice(std::string simId) {
 	}
 }
 
-SimChannel<bool>* SimDevice::getLogicChannel(int subDeviceNumber, int channel) {
+std::shared_ptr<SimChannel<bool>> SimDevice::getLogicChannel(int subDeviceNumber, int channel) {
 	if(simId == "reflect"){
 		// digital output simulation block
 		
 		switch(subDeviceNumber){
 			// simulate digital Out
 			case REFLECT_OUT_DIGOUT:{
-				return dynamic_cast<SimChannel<bool>*>(reflectDigOut.getInChannel(channel));
+				return reflectDigOut.getInChannel(channel);
 				break;		// not reached
 			}
 			case REFLECT_OUT_DIGIN:{
-				return dynamic_cast<SimChannel<bool>*>(reflectDigOut.getOutChannel(channel));
+				return reflectDigOut.getOutChannel(channel);
 				break;		// not reached
 			}
 			// simulate digital In
 			case REFLECT_IN_DIGIN:{
-				return dynamic_cast<SimChannel<bool>*>(reflectDigIn.getOutChannel(channel));
+				return reflectDigIn.getOutChannel(channel);
 				break;
 			}
 			case REFLECT_IN_DIGOUT:{
-				return dynamic_cast<SimChannel<bool>*>(reflectDigIn.getInChannel(channel));
+				return reflectDigIn.getInChannel(channel);
 				break;
 			}
 		}

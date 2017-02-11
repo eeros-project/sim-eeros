@@ -2,6 +2,7 @@
 #define SIM_EEROS_DIGIN_HPP_
 
 #include <string>
+#include <memory>
 #include <eeros/hal/Input.hpp>
 #include <SimDevice.hpp>
 #include <SimChannel.hpp>
@@ -13,7 +14,7 @@ namespace sim {
 		virtual bool get();
 		
 	private:
-		SimChannel<bool>* chan;
+		std::shared_ptr<SimChannel<bool>> chan;
 		
 		bool inverted;
 		

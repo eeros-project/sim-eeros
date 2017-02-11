@@ -2,6 +2,7 @@
 #define SIM_EEROS_DIGOUT_HPP_
 
 #include <string>
+#include <memory>
 #include <eeros/hal/Output.hpp>
 #include <SimDevice.hpp>
 #include <SimChannel.hpp>
@@ -14,7 +15,7 @@ namespace sim {
 		virtual void set(bool value);
 		
 	private:
-		SimChannel<bool>* chan;
+		std::shared_ptr<SimChannel<bool>> chan;
 		
 		bool inverted;
 	};

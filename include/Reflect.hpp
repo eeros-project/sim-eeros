@@ -2,6 +2,7 @@
 #define SIM_EEROS_REFLECT_HPP_
 
 #include <vector>
+#include <memory>
 
 #include <SimBehaviour.hpp>
 #include <SimChannel.hpp>
@@ -31,8 +32,8 @@ namespace sim{
 				}
 				// create channels
 				for(int i = 0; i < nofSimChannels; i++){
-					in.push_back(new SimChannel<T>(subDevNumbers[0], i));
-					out.push_back(new SimChannel<T>(subDevNumbers[1], i));
+					in.push_back(std::shared_ptr<SimChannel<T>>(new SimChannel<T>(subDevNumbers[0], i)));
+					out.push_back(std::shared_ptr<SimChannel<T>>(new SimChannel<T>(subDevNumbers[1], i)));
 				}
 			}
 			~Reflect() {
@@ -47,7 +48,7 @@ namespace sim{
 				}
 			}
 			
-			virtual sim::SimChannel<T> * getInChannel(int channel){
+			virtual std::shared_ptr<sim::SimChannel<T>> getInChannel(int channel){
 				for(int i = 0; i < in.size(); i++){
 					if(in[i]->getChannel() == channel){
 						return in[i];
@@ -55,8 +56,7 @@ namespace sim{
 				}
 				throw eeros::EEROSException("In channel not found");
 			}
-			
-			virtual sim::SimChannel<T> * getOutChannel(int channel){
+			virtual std::shared_ptr<sim::SimChannel<T>> getOutChannel(int channel){
 				for(int i = 0; i < out.size(); i++){
 					if(out[i]->getChannel() == channel){
 						return out[i];
@@ -67,8 +67,8 @@ namespace sim{
 			
 		private:
 			// simulation: reflect in to out
-			std::vector<sim::SimChannel<T> *> out;
-			std::vector<sim::SimChannel<T> *> in;
+			std::vector<std::shared_ptr<sim::SimChannel<T>>> out;
+			std::vector<std::shared_ptr<sim::SimChannel<T>>> in;
 			
 			std::vector<int> subDevNumbers;
   
