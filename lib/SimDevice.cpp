@@ -80,7 +80,7 @@ std::shared_ptr<SimChannel<bool>> SimDevice::getLogicChannel(int subDeviceNumber
 std::shared_ptr<SimChannel<uint64_t>> SimDevice::getRealChannel(int subDeviceNumber, int channel) {
 	if(simId == "reflect"){
 		// digital output simulation block
-		std::cout << "subD: " << subDeviceNumber << "\tchan: " << channel << std::endl;
+		
 		switch(subDeviceNumber){
 			// simulate analog Out
 			case REFLECT_OUT_AOUT:{
@@ -116,7 +116,7 @@ void SimDevice::run() {
 		reflectAnalogOut.run();
 		reflectAnalogIn.run();
 		
-		usleep(100000);
+		usleep(1000);
 	}
 }
 

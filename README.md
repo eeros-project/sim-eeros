@@ -37,6 +37,8 @@ example to test digital output "out0" which can be read on test input "inTest0"
 		    }
 }
 ```
+for a complete example visit https://github.com/akalberer/eeros-framework/tree/hal/examples/sim 
+or soon https://github.com/eeros-project/eeros-framework
 
 ## Available subdevices
 | Function            | Description                     | Subdevice     | available Channels  |

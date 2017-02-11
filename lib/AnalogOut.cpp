@@ -15,8 +15,6 @@ AnalogOut::AnalogOut(std::string id,
 					 std::string unit
 		    ) : ScalableOutput<double>(id, libHandle, scale, offset, rangeMin, rangeMax, unit) {
 	SimDevice *dev = SimDevice::getDevice(device);
-	
-	std::cout << "outC s:" << subDeviceNumber << "\tc; " << channel << std::endl;
 	this->chan = dev->getRealChannel(subDeviceNumber, channel);
 }
 

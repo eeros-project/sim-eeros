@@ -15,7 +15,6 @@ AnalogIn::AnalogIn(std::string id,
 					 std::string unit
 		  ) : ScalableInput<double>(id, libHandle, scale, offset, rangeMin, rangeMax, unit) {
 	SimDevice *dev = SimDevice::getDevice(device);
-	std::cout << "inC s:" << subDeviceNumber << "\tc; " << channel << std::endl;
 	this->chan = dev->getRealChannel(subDeviceNumber, channel);
 }
 
