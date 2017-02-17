@@ -4,8 +4,8 @@
 #include <vector>
 #include <memory>
 
-#include <SimBehaviour.hpp>
-#include <SimChannel.hpp>
+#include "SimBehaviour.hpp"
+#include "SimChannel.hpp"
 #include <eeros/core/EEROSException.hpp>
 
 /**

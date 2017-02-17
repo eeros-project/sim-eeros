@@ -1,4 +1,4 @@
-#include <SimAnalogIn.hpp>
+#include "../include/AnalogIn.hpp"
 #include <iostream>
 
 using namespace sim;

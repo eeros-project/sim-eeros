@@ -4,8 +4,8 @@
 #include <string>
 #include <limits>
 #include <eeros/hal/ScalableInput.hpp>
-#include <SimDevice.hpp>
-#include <SimChannel.hpp>
+#include "SimDevice.hpp"
+#include "SimChannel.hpp"
 
 namespace sim {
 	class AnalogIn : public eeros::hal::ScalableInput<double> {

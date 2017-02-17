@@ -1,4 +1,4 @@
-#include <SimDigIn.hpp>
+#include "../include/DigIn.hpp"
 
 using namespace sim;
 

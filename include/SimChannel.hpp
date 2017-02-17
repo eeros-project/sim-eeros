@@ -27,7 +27,7 @@ namespace sim {
 		private:
 			int subDevice;
 			int channel;
-			std::atomic<T> value;
+			std::atomic<T> value {0};
 	};
 };
 

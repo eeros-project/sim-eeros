@@ -1,4 +1,4 @@
-#include <SimDevice.hpp>
+#include "../include/SimDevice.hpp"
 #include <eeros/core/EEROSException.hpp>
 #include <unistd.h>
 #include <iostream>

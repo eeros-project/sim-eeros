@@ -6,8 +6,8 @@
 #include <vector>
 #include <memory>
 #include <thread>
-#include <SimChannel.hpp>
-#include <Reflect.hpp>
+#include "SimChannel.hpp"
+#include "Reflect.hpp"
 
 namespace sim {
 	enum SubDeviceNumber{

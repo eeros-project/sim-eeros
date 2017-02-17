@@ -4,8 +4,8 @@
 #include <string>
 #include <limits>
 #include <eeros/hal/ScalableOutput.hpp>
-#include <SimDevice.hpp>
-#include <SimChannel.hpp>
+#include "SimDevice.hpp"
+#include "SimChannel.hpp"
 
 namespace sim {
 	class AnalogOut : public eeros::hal::ScalableOutput<double> {

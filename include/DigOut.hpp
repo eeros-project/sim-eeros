@@ -4,8 +4,8 @@
 #include <string>
 #include <memory>
 #include <eeros/hal/Output.hpp>
-#include <SimDevice.hpp>
-#include <SimChannel.hpp>
+#include "SimDevice.hpp"
+#include "SimChannel.hpp"
 
 namespace sim {
 	class DigOut : public eeros::hal::Output<bool> {

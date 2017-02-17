@@ -1,4 +1,4 @@
-#include <SimDigOut.hpp>
+#include "../include/DigOut.hpp"
 
 using namespace sim;
 

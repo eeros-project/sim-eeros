@@ -15,6 +15,11 @@ add_subdirectory(lib)
 add_subdirectory(test)
 
 INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/SimDevice.hpp
-	${CMAKE_CURRENT_SOURCE_DIR}/include/SimDigIn.hpp 
-	${CMAKE_CURRENT_SOURCE_DIR}/include/SimDigOut.hpp
-DESTINATION include)
+	${CMAKE_CURRENT_SOURCE_DIR}/include/SimBehaviour.hpp
+	${CMAKE_CURRENT_SOURCE_DIR}/include/SimChannel.hpp
+	${CMAKE_CURRENT_SOURCE_DIR}/include/DigIn.hpp 
+	${CMAKE_CURRENT_SOURCE_DIR}/include/DigOut.hpp
+	${CMAKE_CURRENT_SOURCE_DIR}/include/AnalogIn.hpp
+	${CMAKE_CURRENT_SOURCE_DIR}/include/AnalogOut.hpp
+	${CMAKE_CURRENT_SOURCE_DIR}/include/Reflect.hpp
+DESTINATION include/sim-eeros)

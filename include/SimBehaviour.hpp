@@ -1,7 +1,7 @@
 #ifndef SIM_EEROS_BEHAVIOUR_HPP_
 #define SIM_EEROS_BEHAVIOUR_HPP_
 
-#include <SimChannel.hpp>
+#include "SimChannel.hpp"
 #include <memory>
 
 namespace sim{
