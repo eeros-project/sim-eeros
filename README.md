@@ -61,7 +61,7 @@ or soon on https://github.com/eeros-project/eeros-framework
    * run() : implement your desired simulation function -> will be called from SimDevice::run()
    * getInChannel(): return shared_ptr to input channel of your device
    * getOutChannel(): return shared_ptr to output channel of your device
-1. add channels to SimDevice.hpp (see sim::Reflect<bool> reflectDigOut)
+1. add newly created device type as member object to SimDevice.hpp (for example see sim::Reflect<bool> reflectDigOut)
 1. call run() of your newly added channels in SimDevice::run(): only with this your device run() is executed
 1. add identifier string to available simFeatures in SimDevice.hpp
 1. add entries to SubDeviceNumber-Enum in SimDevice.hpp with your desired subdevice number for your sim-device
