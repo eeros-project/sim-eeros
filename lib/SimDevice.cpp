@@ -12,10 +12,10 @@ std::map<std::string, SimDevice *> SimDevice::devices;
 // device will select function 
 
 SimDevice::SimDevice(std::string simId) : 
-		      reflectDigOut(NOF_SIM_CHANNELS, {REFLECT_OUT_DIGOUT, REFLECT_OUT_DIGIN}), 
-		      reflectDigIn(NOF_SIM_CHANNELS, {REFLECT_IN_DIGIN, REFLECT_IN_DIGOUT}),
-		      reflectAnalogOut(NOF_SIM_CHANNELS, {REFLECT_OUT_AOUT, REFLECT_OUT_AIN}),
-		      reflectAnalogIn(NOF_SIM_CHANNELS, {REFLECT_IN_AIN, REFLECT_IN_AOUT}) {
+		      digOut(NOF_SIM_CHANNELS, {REFLECT_OUT_DIGOUT, REFLECT_OUT_DIGIN}), 
+		      digIn(NOF_SIM_CHANNELS, {REFLECT_IN_DIGIN, REFLECT_IN_DIGOUT}),
+		      analogOut(NOF_SIM_CHANNELS, {REFLECT_OUT_AOUT, REFLECT_OUT_AIN}),
+		      analogIn(NOF_SIM_CHANNELS, {REFLECT_IN_AIN, REFLECT_IN_AOUT}) {
 	this->simId = simId;
 	auto devIt = devices.find(simId);
 	if(devIt != devices.end()){
@@ -56,20 +56,20 @@ std::shared_ptr<SimChannel<bool>> SimDevice::getLogicChannel(int subDeviceNumber
 		switch(subDeviceNumber){
 			// simulate digital Out
 			case REFLECT_OUT_DIGOUT:{
-				return reflectDigOut.getInChannel(channel);
+				return digOut.getInChannel(channel);
 				break;		// not reached
 			}
 			case REFLECT_OUT_DIGIN:{
-				return reflectDigOut.getOutChannel(channel);
+				return digOut.getOutChannel(channel);
 				break;		// not reached
 			}
 			// simulate digital In
 			case REFLECT_IN_DIGIN:{
-				return reflectDigIn.getOutChannel(channel);
+				return digIn.getOutChannel(channel);
 				break;
 			}
 			case REFLECT_IN_DIGOUT:{
-				return reflectDigIn.getInChannel(channel);
+				return digIn.getInChannel(channel);
 				break;
 			}
 		}
@@ -86,20 +86,20 @@ std::shared_ptr<SimChannel<double>> SimDevice::getRealChannel(int subDeviceNumbe
 		switch(subDeviceNumber){
 			// simulate analog Out
 			case REFLECT_OUT_AOUT:{
-				return reflectAnalogOut.getInChannel(channel);
+				return analogOut.getInChannel(channel);
 				break;		// not reached
 			}
 			case REFLECT_OUT_AIN:{
-				return reflectAnalogOut.getOutChannel(channel);
+				return analogOut.getOutChannel(channel);
 				break;		// not reached
 			}
 			// simulate analog In
 			case REFLECT_IN_AIN:{
-				return reflectAnalogIn.getOutChannel(channel);
+				return analogIn.getOutChannel(channel);
 				break;
 			}
 			case REFLECT_IN_AOUT:{
-				return reflectAnalogIn.getInChannel(channel);
+				return analogIn.getInChannel(channel);
 				break;
 			}
 		}
@@ -111,10 +111,10 @@ std::shared_ptr<SimChannel<double>> SimDevice::getRealChannel(int subDeviceNumbe
 
 void SimDevice::run() {
 	while(true){
-		reflectDigOut.run();
-		reflectDigIn.run();
-		reflectAnalogOut.run();
-		reflectAnalogIn.run();
+		digOut.run();
+		digIn.run();
+		analogOut.run();
+		analogIn.run();
 		
 		usleep(1000);
 	}

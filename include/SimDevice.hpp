@@ -42,12 +42,12 @@ namespace sim {
 		std::string simId;
 		
 		// logic channels
-		sim::Reflect<bool> reflectDigOut;
-		sim::Reflect<bool> reflectDigIn;
+		sim::Reflect<bool> digOut;
+		sim::Reflect<bool> digIn;
 		
 		// real channels
-		sim::Reflect<double> reflectAnalogOut;
-		sim::Reflect<double> reflectAnalogIn;
+		sim::Reflect<double> analogOut;
+		sim::Reflect<double> analogIn;
 		
 		static std::map<std::string, sim::SimDevice *> devices;
 		std::thread* t;
