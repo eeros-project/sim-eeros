@@ -11,11 +11,12 @@ std::map<std::string, SimDevice *> SimDevice::devices;
 
 // device will select function 
 
-SimDevice::SimDevice(std::string simId) : 
-		      digOut(NOF_SIM_CHANNELS, {REFLECT_OUT_DIGOUT, REFLECT_OUT_DIGIN}), 
-		      digIn(NOF_SIM_CHANNELS, {REFLECT_IN_DIGIN, REFLECT_IN_DIGOUT}),
-		      analogOut(NOF_SIM_CHANNELS, {REFLECT_OUT_AOUT, REFLECT_OUT_AIN}),
-		      analogIn(NOF_SIM_CHANNELS, {REFLECT_IN_AIN, REFLECT_IN_AOUT}) {
+SimDevice::SimDevice(std::string simId, int nofSimChannels, std::initializer_list<int> subDevNumDigOut, std::initializer_list<int> subDevNumDigIn, 
+		     std::initializer_list<int> subDevNumAnalogOut, std::initializer_list<int> subDevNumAnalogIn) :
+		      digOut(nofSimChannels, subDevNumDigOut),
+		      digIn(nofSimChannels, subDevNumDigIn),
+		      analogOut(nofSimChannels, subDevNumAnalogOut),
+		      analogIn(nofSimChannels, subDevNumAnalogIn) {
 	this->simId = simId;
 	auto devIt = devices.find(simId);
 	if(devIt != devices.end()){
@@ -42,7 +43,10 @@ SimDevice* SimDevice::getDevice(std::string simId) {
 	else{
 		for(int i = 0; i < simFeatures.size(); i++){
 			if(simFeatures[i] == simId){
-				return new SimDevice(simId);
+				if(simId == "reflect"){
+					return new SimDevice(simId, NOF_SIM_CHANNELS, {REFLECT_OUT_DIGOUT, REFLECT_OUT_DIGIN}, {REFLECT_IN_DIGIN, REFLECT_IN_DIGOUT}, 
+							     {REFLECT_OUT_AOUT, REFLECT_OUT_AIN}, {REFLECT_IN_AIN, REFLECT_IN_AOUT});
+				}
 			}
 		}
 		throw eeros::EEROSException("simulation feature '" + simId + "' is not supported.");

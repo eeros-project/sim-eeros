@@ -36,7 +36,8 @@ namespace sim {
 		static SimDevice* getDevice(std::string simId);
 
         private:
-		SimDevice(std::string simId);
+		SimDevice(std::string simId, int nofSimChannels, std::initializer_list<int> subDevNumDigOut, std::initializer_list<int> subDevNumDigIn, 
+		     std::initializer_list<int> subDevNumAnalogOut, std::initializer_list<int> subDevNumAnalogIn);
 		virtual void run();
 		
 		std::string simId;
