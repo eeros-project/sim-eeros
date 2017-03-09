@@ -18,6 +18,12 @@ SimDevice::SimDevice(std::string simId, int nofSimChannels, std::initializer_lis
 		      analogOut(nofSimChannels, subDevNumAnalogOut),
 		      analogIn(nofSimChannels, subDevNumAnalogIn) {
 	this->simId = simId;
+	
+	logicSimBlocks.push_back(&digOut);
+	logicSimBlocks.push_back(&digIn);
+	scalableSimBlocks.push_back(&analogOut);
+	scalableSimBlocks.push_back(&analogIn);
+	
 	auto devIt = devices.find(simId);
 	if(devIt != devices.end()){
 		throw new eeros::EEROSException("device already open, claim already opened device via getDevice()"); // should not occur!
@@ -115,10 +121,13 @@ std::shared_ptr<SimChannel<double>> SimDevice::getRealChannel(int subDeviceNumbe
 
 void SimDevice::run() {
 	while(true){
-		digOut.run();
-		digIn.run();
-		analogOut.run();
-		analogIn.run();
+		
+		for(int i = 0; i < logicSimBlocks.size(); i++) {
+			logicSimBlocks[i]->run();
+		}
+		for(int i = 0; i < scalableSimBlocks.size(); i++) {
+			scalableSimBlocks[i]->run();
+		}
 		
 		usleep(1000);
 	}

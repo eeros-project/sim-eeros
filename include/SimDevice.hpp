@@ -50,6 +50,9 @@ namespace sim {
 		sim::Reflect<double> analogOut;
 		sim::Reflect<double> analogIn;
 		
+		std::vector<sim::SimBehaviour<double> *> scalableSimBlocks;
+		std::vector<sim::SimBehaviour<bool> *> logicSimBlocks;
+		
 		static std::map<std::string, sim::SimDevice *> devices;
 		std::thread* t;
 	};

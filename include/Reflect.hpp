@@ -24,7 +24,7 @@
 namespace sim{
 
 	template <typename T>
-	class Reflect : SimBehaviour<T> {
+	class Reflect : public SimBehaviour<T> {
 		public:
 			Reflect(int nofSimChannels, std::initializer_list<int> subDeviceNumber) : subDevNumbers(subDeviceNumber){
 				if(subDeviceNumber.size() != 2){
