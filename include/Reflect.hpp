@@ -6,7 +6,7 @@
 
 #include "SimBehaviour.hpp"
 #include "SimChannel.hpp"
-#include <eeros/core/EEROSException.hpp>
+#include <eeros/core/Fault.hpp>
 
 /**
  * usage: 
@@ -28,7 +28,7 @@ namespace sim{
 		public:
 			Reflect(int nofSimChannels, std::initializer_list<int> subDeviceNumber) : subDevNumbers(subDeviceNumber){
 				if(subDeviceNumber.size() != 2){
-					throw eeros::EEROSException("number of SubDeviceNumbers is not 2!");
+					throw eeros::Fault("number of SubDeviceNumbers is not 2!");
 				}
 				// create channels
 				for(int i = 0; i < nofSimChannels; i++){
@@ -54,7 +54,7 @@ namespace sim{
 						return in[i];
 					}
 				}
-				throw eeros::EEROSException("In channel not found");
+				throw eeros::Fault("In channel not found");
 			}
 			virtual std::shared_ptr<sim::SimChannel<T>> getOutChannel(int channel){
 				for(int i = 0; i < out.size(); i++){
@@ -62,7 +62,7 @@ namespace sim{
 						return out[i];
 					}
 				}
-				throw eeros::EEROSException("Out channel not found");
+				throw eeros::Fault("Out channel not found");
 			}
 			
 		private:

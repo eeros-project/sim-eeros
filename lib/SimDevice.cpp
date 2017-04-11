@@ -1,5 +1,5 @@
 #include "../include/SimDevice.hpp"
-#include <eeros/core/EEROSException.hpp>
+#include <eeros/core/Fault.hpp>
 #include <unistd.h>
 #include <iostream>
 
@@ -26,7 +26,7 @@ SimDevice::SimDevice(std::string simId, int nofSimChannels, std::initializer_lis
 	
 	auto devIt = devices.find(simId);
 	if(devIt != devices.end()){
-		throw new eeros::EEROSException("device already open, claim already opened device via getDevice()"); // should not occur!
+		throw new eeros::Fault("device already open, claim already opened device via getDevice()"); // should not occur!
 	}
 	
 	t = new std::thread([this](){ this->run(); });
@@ -55,7 +55,7 @@ SimDevice* SimDevice::getDevice(std::string simId) {
 				}
 			}
 		}
-		throw eeros::EEROSException("simulation feature '" + simId + "' is not supported.");
+		throw eeros::Fault("simulation feature '" + simId + "' is not supported.");
 	}
 }
 
@@ -85,7 +85,7 @@ std::shared_ptr<SimChannel<bool>> SimDevice::getLogicChannel(int subDeviceNumber
 		}
 	}
 	else{
-		throw eeros::EEROSException("getChannel failed: no such device");
+		throw eeros::Fault("getChannel failed: no such device");
 	}
 }
 
@@ -115,7 +115,7 @@ std::shared_ptr<SimChannel<double>> SimDevice::getRealChannel(int subDeviceNumbe
 		}
 	}
 	else{
-		throw eeros::EEROSException("getChannel failed: no such device");
+		throw eeros::Fault("getChannel failed: no such device");
 	}
 }
 
