@@ -1,7 +1,9 @@
 # sim-eeros
-Hardware Simulator for EEROS 
+Hardware Simulator for https://github.com/eeros-project
 
-visit http://eeros.org/ and https://github.com/eeros-project
+## Documentation
+- Using the simulator: (http://wiki.eeros.org/eeros_architecture/hal/hardware_libraries#simulator) 
+- Extending the simulator: (http://wiki.eeros.org/for_developers/simulator) 
 
 ## Available devices
 * reflect: reflects input from subdevice channel x to output subdevice channel x
@@ -53,17 +55,3 @@ or soon on https://github.com/eeros-project/eeros-framework
 |                     | Reflected test input for EEROS  |     5         |        0-10         |
 | Analog Input        | Input to test                   |     6         |        0-10         |
 |                     | Reflected test output for EEROS |     7         |        0-10         |
-
-### for Developers: add new device type to sim-eeros
-1. create class derived from SimBehaviour.hpp
-1. implement member functions according to your needs
-   * constructor: create your simulation channels
-   * run() : implement your desired simulation function -> will be called from SimDevice::run()
-   * getInChannel(): return shared_ptr to input channel of your device
-   * getOutChannel(): return shared_ptr to output channel of your device
-1. add newly created device type as member object to SimDevice.hpp (for example see sim::Reflect<bool> reflectDigOut)
-1. call run() of your newly added channels in SimDevice::run(): only with this your device run() is executed
-1. add identifier string to available simFeatures in SimDevice.hpp
-1. add entries to SubDeviceNumber-Enum in SimDevice.hpp with your desired subdevice number for your sim-device
-1. add getInChannel() and getOutChannel() of your device type to getLogicChannel() or getRealChannel() in SimDevice.cpp accordingly
-
