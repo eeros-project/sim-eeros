@@ -82,16 +82,18 @@ std::shared_ptr<SimChannel<bool>> SimDevice::getLogicChannel(int subDeviceNumber
 				return digIn.getInChannel(channel);
 				break;
 			}
+			default:
+				throw eeros::Fault("getChannel failed: no such subdevice");
 		}
 	}
 	else{
-		throw eeros::Fault("getChannel failed: no such device");
+		throw eeros::Fault("getLogicChannel failed: no such device");
 	}
 }
 
 std::shared_ptr<SimChannel<double>> SimDevice::getRealChannel(int subDeviceNumber, int channel) {
 	if(simId == "reflect"){
-		// digital output simulation block
+		// digital output simulation block 
 		
 		switch(subDeviceNumber){
 			// simulate analog Out
@@ -112,6 +114,8 @@ std::shared_ptr<SimChannel<double>> SimDevice::getRealChannel(int subDeviceNumbe
 				return analogIn.getInChannel(channel);
 				break;
 			}
+			default:
+				throw eeros::Fault("getRealChannel failed: no such subdevice");
 		}
 	}
 	else{
