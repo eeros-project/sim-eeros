@@ -11,17 +11,11 @@
 
 namespace sim {
 	enum SubDeviceNumber{
-			REFLECT_OUT_DIGOUT = 0,
-			REFLECT_OUT_DIGIN = 1,
+			REFLECT_DOUT = 0,
+			REFLECT_DIN = 1,
 			
-			REFLECT_IN_DIGIN = 2,
-			REFLECT_IN_DIGOUT = 3,
-			
-			REFLECT_OUT_AOUT = 4,
-			REFLECT_OUT_AIN = 5,
-			
-			REFLECT_IN_AIN = 6,
-			REFLECT_IN_AOUT = 7
+			REFLECT_AOUT = 2,
+			REFLECT_AIN = 3
 	};
 	
 	const std::vector<std::string> simFeatures = {
@@ -36,20 +30,12 @@ namespace sim {
 		static SimDevice* getDevice(std::string simId);
 
         private:
-		SimDevice(std::string simId, int nofSimChannels, std::initializer_list<int> subDevNumDigOut, std::initializer_list<int> subDevNumDigIn, 
-		     std::initializer_list<int> subDevNumAnalogOut, std::initializer_list<int> subDevNumAnalogIn);
+		SimDevice(std::string simId, int nofSimChannels, std::initializer_list<int> subDevNumDig, std::initializer_list<int> subDevNumAn);
 		virtual void run();
 		
 		std::string simId;
-		
-		// logic channels
-		sim::Reflect<bool> digOut;
-		sim::Reflect<bool> digIn;
-		
-		// real channels
-		sim::Reflect<double> analogOut;
-		sim::Reflect<double> analogIn;
-		
+		sim::Reflect<bool> dig;	// logic channels
+		sim::Reflect<double> an;	// real channels		
 		std::vector<sim::SimBehaviour<double> *> scalableSimBlocks;
 		std::vector<sim::SimBehaviour<bool> *> logicSimBlocks;
 		

@@ -30,6 +30,7 @@ namespace sim{
 				if(subDeviceNumber.size() != 2){
 					throw eeros::Fault("number of SubDeviceNumbers is not 2!");
 				}
+
 				// create channels
 				for(int i = 0; i < nofSimChannels; i++){
 					in.push_back(std::shared_ptr<SimChannel<T>>(new SimChannel<T>(subDevNumbers[0], i)));
@@ -66,7 +67,6 @@ namespace sim{
 			}
 			
 		private:
-			// simulation: reflect in to out
 			std::vector<std::shared_ptr<sim::SimChannel<T>>> out;
 			std::vector<std::shared_ptr<sim::SimChannel<T>>> in;
 			

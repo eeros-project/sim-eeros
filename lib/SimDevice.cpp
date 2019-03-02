@@ -1,6 +1,7 @@
 #include "../include/SimDevice.hpp"
 #include <eeros/core/Fault.hpp>
 #include <unistd.h>
+// device will select function 
 #include <iostream>
 
 using namespace sim;
@@ -9,20 +10,13 @@ std::map<std::string, SimDevice *> SimDevice::devices;
 
 #define NOF_SIM_CHANNELS 10
 
-// device will select function 
-
-SimDevice::SimDevice(std::string simId, int nofSimChannels, std::initializer_list<int> subDevNumDigOut, std::initializer_list<int> subDevNumDigIn, 
-		     std::initializer_list<int> subDevNumAnalogOut, std::initializer_list<int> subDevNumAnalogIn) :
-		      digOut(nofSimChannels, subDevNumDigOut),
-		      digIn(nofSimChannels, subDevNumDigIn),
-		      analogOut(nofSimChannels, subDevNumAnalogOut),
-		      analogIn(nofSimChannels, subDevNumAnalogIn) {
+SimDevice::SimDevice(std::string simId, int nofSimChannels, std::initializer_list<int> subDevNumDig, std::initializer_list<int> subDevNumAn) :
+		      dig(nofSimChannels, subDevNumDig),
+		      an(nofSimChannels, subDevNumAn) {
 	this->simId = simId;
 	
-	logicSimBlocks.push_back(&digOut);
-	logicSimBlocks.push_back(&digIn);
-	scalableSimBlocks.push_back(&analogOut);
-	scalableSimBlocks.push_back(&analogIn);
+	logicSimBlocks.push_back(&dig);
+	scalableSimBlocks.push_back(&an);
 	
 	auto devIt = devices.find(simId);
 	if(devIt != devices.end()){
@@ -50,8 +44,7 @@ SimDevice* SimDevice::getDevice(std::string simId) {
 		for(int i = 0; i < simFeatures.size(); i++){
 			if(simFeatures[i] == simId){
 				if(simId == "reflect"){
-					return new SimDevice(simId, NOF_SIM_CHANNELS, {REFLECT_OUT_DIGOUT, REFLECT_OUT_DIGIN}, {REFLECT_IN_DIGIN, REFLECT_IN_DIGOUT}, 
-							     {REFLECT_OUT_AOUT, REFLECT_OUT_AIN}, {REFLECT_IN_AIN, REFLECT_IN_AOUT});
+					return new SimDevice(simId, NOF_SIM_CHANNELS, {REFLECT_DOUT, REFLECT_DIN}, {REFLECT_AOUT, REFLECT_AIN});
 				}
 			}
 		}
@@ -61,26 +54,15 @@ SimDevice* SimDevice::getDevice(std::string simId) {
 
 std::shared_ptr<SimChannel<bool>> SimDevice::getLogicChannel(int subDeviceNumber, int channel) {
 	if(simId == "reflect"){
-		// digital output simulation block
-		
+		// digital channel simulation block
 		switch(subDeviceNumber){
-			// simulate digital Out
-			case REFLECT_OUT_DIGOUT:{
-				return digOut.getInChannel(channel);
+			case REFLECT_DOUT:{
+				return dig.getInChannel(channel);
 				break;		// not reached
 			}
-			case REFLECT_OUT_DIGIN:{
-				return digOut.getOutChannel(channel);
+			case REFLECT_DIN:{
+				return dig.getOutChannel(channel);
 				break;		// not reached
-			}
-			// simulate digital In
-			case REFLECT_IN_DIGIN:{
-				return digIn.getOutChannel(channel);
-				break;
-			}
-			case REFLECT_IN_DIGOUT:{
-				return digIn.getInChannel(channel);
-				break;
 			}
 			default:
 				throw eeros::Fault("getChannel failed: no such subdevice");
@@ -93,26 +75,15 @@ std::shared_ptr<SimChannel<bool>> SimDevice::getLogicChannel(int subDeviceNumber
 
 std::shared_ptr<SimChannel<double>> SimDevice::getRealChannel(int subDeviceNumber, int channel) {
 	if(simId == "reflect"){
-		// digital output simulation block 
-		
+		// analog channel simulation block 	
 		switch(subDeviceNumber){
-			// simulate analog Out
-			case REFLECT_OUT_AOUT:{
-				return analogOut.getInChannel(channel);
+			case REFLECT_AOUT:{
+				return an.getInChannel(channel);
 				break;		// not reached
 			}
-			case REFLECT_OUT_AIN:{
-				return analogOut.getOutChannel(channel);
+			case REFLECT_AIN:{
+				return an.getOutChannel(channel);
 				break;		// not reached
-			}
-			// simulate analog In
-			case REFLECT_IN_AIN:{
-				return analogIn.getOutChannel(channel);
-				break;
-			}
-			case REFLECT_IN_AOUT:{
-				return analogIn.getInChannel(channel);
-				break;
 			}
 			default:
 				throw eeros::Fault("getRealChannel failed: no such subdevice");
