@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.5.1)
 project(sim-eeros)
 
 ## Compiler flags
@@ -23,3 +23,4 @@ INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/SimDevice.hpp
 	${CMAKE_CURRENT_SOURCE_DIR}/include/AnalogOut.hpp
 	${CMAKE_CURRENT_SOURCE_DIR}/include/Reflect.hpp
 DESTINATION include/sim-eeros)
+
