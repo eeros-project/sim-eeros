@@ -1,8 +1,7 @@
 cmake_minimum_required(VERSION 3.5.1)
 project(sim-eeros)
 
-## Compiler flags
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_STANDARD 14)
 
 find_package(EEROS REQUIRED)
 include_directories(${EEROS_INCLUDE_DIR})
