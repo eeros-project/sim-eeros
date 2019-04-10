@@ -5,6 +5,9 @@ set(CMAKE_CXX_STANDARD 14)
 
 set(RECOMMENDED_EEROS_VERSION 1.0.0.25) # unreleased version which was tested
 
+include(cmake/MunkeiVersionFromGit.cmake)
+version_from_git() # Fetch the library version information from git
+
 include_directories(${ADDITIONAL_INCLUDE_DIRS})
 link_directories(${ADDITIONAL_LINK_DIRS})
 
