@@ -6,7 +6,6 @@ add_library(simeeros SHARED ${SIMEEROS_SRCS})
 add_library(simeeros_static ${SIMEEROS_SRCS})
 
 
-set(LIBRARY_VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}.${VERSION_TWEAK})
 target_link_libraries(simeeros eeros)
 set_target_properties(simeeros PROPERTIES VERSION ${LIBRARY_VERSION})
 
