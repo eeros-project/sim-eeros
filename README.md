@@ -18,6 +18,6 @@ The EEROS framework uses various [hardware libraries](http://wiki.eeros.org/eero
 The EEROS [Hardware Abstraction Layer](http://wiki.eeros.org/eeros_architecture/hal/start) needs a [configuration file](http://wiki.eeros.org/eeros_architecture/hal/configuration_file) which describes the hardware, or in our case the simulator. A hardware configuration file describing the features in the simulator can be found at (https://github.com/eeros-project/eeros-framework/tree/master/examples/hal). It is called *HalTest1Config.json*.
 
 
-## How to contribute to bbblue-eeros
+## How to contribute to sim-eeros
 
 The [EEROS Team](http://eeros.org/eeros-team/) would love to accept your contributions! The development on the EEROS Framework is done with the work flow “**develop with a fork**”. So please fork the repository, develop and test your code changes. For code quality, please follow the guidelines put together [here](http://wiki.eeros.org/for_developers/start). In general, the code should adheres to the existing style in the project. Once the changes are ready, a pull request is submitted. Each logical change should be submitted separately to ensure that the history will be understandable.
