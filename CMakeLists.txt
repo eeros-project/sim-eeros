@@ -5,7 +5,7 @@ project(sim-eeros)
 set(CMAKE_CXX_STANDARD 14)
 
 
-set(RECOMMENDED_EEROS_VERSION 1.0.0.48) # unreleased version which was tested
+set(RECOMMENDED_EEROS_VERSION 1.1.0.0)
 
 
 if(CMAKE_BUILD_TYPE MATCHES "Debug|DEBUG")
