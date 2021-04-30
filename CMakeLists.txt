@@ -13,7 +13,7 @@ set(LOAD_CMAKE_MODULES_LIB TRUE CACHE BOOL "TRUE if the cmake-modules library sh
 
 if(LOAD_CMAKE_MODULES_LIB)
   include(cmake/CMakeModulesLibLoader.cmake)
-  load_cmake_modules_lib(https://github.com/andreaskunz/cmake-modules.git)
+  load_cmake_modules_lib(https://github.com/eeros-project/cmake-modules.git)
 endif()
 
 include(CMakeModulesLib)
