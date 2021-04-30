@@ -5,7 +5,7 @@ project(sim-eeros)
 set(CMAKE_CXX_STANDARD 14)
 
 
-set(RECOMMENDED_EEROS_VERSION 1.1.0.0)
+set(RECOMMENDED_EEROS_VERSION 1.2)
 
 
 ## Load CMake modules library at specified version
