@@ -1,11 +1,11 @@
-cmake_minimum_required(VERSION 3.5.1)
+cmake_minimum_required(VERSION 3.10)
 
 project(sim-eeros)
 
 set(CMAKE_CXX_STANDARD 14)
 
 
-set(RECOMMENDED_EEROS_VERSION 1.2)
+set(RECOMMENDED_EEROS_VERSION 1.3)
 
 
 ## Load CMake modules library at specified version
@@ -32,7 +32,11 @@ include(VersioningHelpers)
 setLibraryVersion()
 
 
-# Find EEROS
+## Create package file
+createPackageFiles(sim-eerosConfig.cmake.in include/ lib/)
+
+
+## Find EEROS
 setVersionToFind("EEROS" "REQUIRED_EEROS_VERSION" ${RECOMMENDED_EEROS_VERSION} ${REQUIRED_EEROS_VERSION})
 find_package(EEROS ${VERSION_TO_FIND})
 checkIfModuleFound("EEROS" "REQUIRED_EEROS_VERSION")
@@ -48,9 +52,6 @@ link_directories(${EEROS_LIB_DIR})
 
 
 add_subdirectory(lib)
-
-
-createPackageFiles(sim-eerosConfig.cmake.in include/ lib/)
 
 
 INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/SimDevice.hpp
