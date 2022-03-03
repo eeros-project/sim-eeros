@@ -44,13 +44,6 @@ set(REQUIRED_DEGREE_OF_VERSION_COMPATIBILITY 2 CACHE STRING "The required degree
 checkVersionCompatibility(${EEROS_VERSION} ${VERSION_TO_FIND} ${REQUIRED_DEGREE_OF_VERSION_COMPATIBILITY})
 
 
-include_directories(${ADDITIONAL_INCLUDE_DIRS})
-link_directories(${ADDITIONAL_LINK_DIRS})
-
-include_directories(${EEROS_INCLUDE_DIR})
-link_directories(${EEROS_LIB_DIR})
-
-
 add_subdirectory(lib)
 
 
