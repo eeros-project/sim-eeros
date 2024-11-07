@@ -6,10 +6,10 @@ add_library(simeeros SHARED ${SIMEEROS_SRCS})
 add_library(simeeros_static ${SIMEEROS_SRCS})
 
 
-target_link_libraries(simeeros eeros)
+target_link_libraries(simeeros EEROS::eeros)
 set_target_properties(simeeros PROPERTIES VERSION ${LIBRARY_VERSION})
 
-target_link_libraries(simeeros_static eeros)
+target_link_libraries(simeeros_static EEROS::eeros)
 
 INSTALL(TARGETS simeeros simeeros_static LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
 
