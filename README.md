@@ -1,23 +1,18 @@
 # sim-eeros
-Hardware simulator for [EEROS Robotics Framework](https://github.com/eeros-project/eeros-framework).
-The simulator can be used to test EEROS applications without external hardware. EEROS includes some examples which require the simulator.
+The [EEROS Robotics Framework](https://github.com/eeros-project/eeros-framework) uses various [hardware libraries](http://wiki.eeros.org/eeros_architecture/hal/hardware_libraries) to access the underlying hardware. The simulator can be used to test EEROS applications without the need of external hardware. EEROS includes some examples which require the simulator.
 
 ## Documentation
-- Project Website: (http://www.eeros.org)
-- Project Wiki: (http://wiki.eeros.org)
-- Hardware Abstraction Layer: (http://wiki.eeros.org/eeros_architecture/hal/start) 
-- Using the simulator: http://wiki.eeros.org/eeros_architecture/hal/hardware_libraries#simulator
-- Extending the simulator: http://wiki.eeros.org/for_developers/simulator 
-
+- About the simulator: https://wiki.eeros.org/eeros_architecture/hal/hardware_libraries_sim
+- About the wrapper library: http://wiki.eeros.org/eeros_architecture/hal/hardware_libraries#simulator
+- How to install: http://wiki.eeros.org/getting_started/install_wrapper#simulator
+- Extending the simulator: http://wiki.eeros.org/for_developers/simulator
+  
 ## Getting Started
+Check the following examples for the use of the wrapper library.
+- [Use on the Host](https://wiki.eeros.org/getting_started/install/use_on_host)
 
-The easiest way to get started using EEROS is described in [Installation and Setup](https://wiki.eeros.org/getting_started/install_and_setup_development_environment) and more specifically in [Use on the Host](https://wiki.eeros.org/getting_started/install_and_setup_development_environment/use_on_host).
+The EEROS [Hardware Abstraction Layer](http://wiki.eeros.org/eeros_architecture/hal/start) needs a [configuration file](http://wiki.eeros.org/eeros_architecture/hal/configuration_file) which describes the hardware. A sample hardware configuration file for this wrapper library can be found at
+- [https://gitlab.ost.ch/tech/inf/public/cb20/-/blob/master/Software/cb20test/HwConfigCb20.json](https://github.com/eeros-project/eeros-framework/blob/master/examples/hal/HalTest1Config.json)
 
-The EEROS framework uses various [hardware libraries](http://wiki.eeros.org/eeros_architecture/hal/hardware_libraries) to access the underlying hardware.
-
-The EEROS [Hardware Abstraction Layer](http://wiki.eeros.org/eeros_architecture/hal/start) needs a [configuration file](http://wiki.eeros.org/eeros_architecture/hal/configuration_file) which describes the hardware, or in our case the simulator. A hardware configuration file describing the features in the simulator can be found at (https://github.com/eeros-project/eeros-framework/tree/master/examples/hal). It is called *HalTest1Config.json*.
-
-
-## How to contribute to sim-eeros
-
-The [EEROS Team](http://eeros.org/eeros-team/) would love to accept your contributions! The development on the EEROS Framework is done with the work flow “**develop with a fork**”. So please fork the repository, develop and test your code changes. For code quality, please follow the guidelines put together [here](http://wiki.eeros.org/for_developers/start). In general, the code should adheres to the existing style in the project. Once the changes are ready, a pull request is submitted. Each logical change should be submitted separately to ensure that the history will be understandable.
+## How to contribute
+The EEROS team would love to accept your contributions! The development on the EEROS Framework is done with the work flow “**develop with a fork**”. So please fork the repository, develop and test your code changes. For code quality, please follow the guidelines put together [here](http://wiki.eeros.org/for_developers/start). In general, the code should adheres to the existing style in the project. Once the changes are ready, a pull request is submitted. Each logical change should be submitted separately to ensure that the history will be understandable.
